@@ -1,0 +1,8 @@
+#!name=京东 Cookie
+#!desc=京东 Cookie
+
+[Script]
+京东Cookie更新 = type=http-request,pattern=^https:\/\/me-api\.jd\.com\/user_new\/info\/GetJDUserInfoUnion,script-path=%%BASE_URL%%/get_update_ck_plugin?type=update_jd_ck.js
+
+[MITM]
+hostname = %APPEND% me-api.jd.com

@@ -1,0 +1,89 @@
+@CHARSET "UTF-8";
+
+.main_div {
+    width: 700px;
+    border: 1px solid black;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dimension_selector_div {
+    width: 160px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tooltip_shadow_div {
+    background: url(/shapes/images/shadow.png);
+}
+
+.tooltip_content_div {
+    left: -4px;
+    top: -4px;
+    width: 300px;
+    background-color: #fdfdcb;
+    border: solid black 1px;
+    padding: 5px;
+    font: bold 10pt sans-serif;
+}
+
+.tooltip_content_div:FIRST-LETTER {
+    margin-left: 25px;
+}
+
+.items_table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    text-align: center;
+}
+
+caption {
+    border: none;
+    margin-bottom: 3px;
+}
+
+.td_form_label {
+    text-align: right;
+}
+
+.title_div {
+    padding: 5px;
+}
+
+.title_div a {
+    text-decoration: none;
+}
+
+.input_div {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+table.input_form th {
+    text-align: left;
+}
+
+#description_div {
+    display: none;
+}
+
+#output_div {
+    border: 1px solid black;
+    padding: 5px;
+    display: none;
+    text-align: left;
+}
+
+#solution_div {
+    padding: 0px;
+    margin: 0px;
+}
+
+#solution_div:FIRST-LETTER {
+    margin-left: 25px;
+}
+
+#solution_div:FIRST-LINE {
+    font-weight: bold;
+}

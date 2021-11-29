@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <title>JD CK 更新</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="/jd_update_ck/css.css" type="text/css" media="all" />
+  <style>
+    body {
+      margin-top: 0;
+      font-family: sans-serif;
+    }
+
+    td.b1 {
+      font-weight: bold;
+      text-align: center;
+    }
+
+    td.b {
+      font-weight: bold;
+      text-align: right;
+      padding-right: 0.5em;
+    }
+
+    a.n {
+      color: green;
+    }
+
+    a.r {
+      color: blue;
+    }
+
+    a.ne {
+      color: orange;
+    }
+
+    a.el {
+      color: gray;
+      font-size: x-small;
+    }
+
+    a.tex {
+      font-size: small;
+      font-family: arial, sans-serif;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .text {
+      font-size: medium;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0.2em;
+    }
+
+    a.gl {
+      color: gray;
+      text-decoration: none
+    }
+
+    td.result {
+      font-size: large;
+    }
+
+    #user_history {
+      position: absolute;
+      visibility: hidden;
+      top: 30px;
+      right: 20px;
+      left: 20px;
+      background-color: #F0F0F0;
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: center;
+    }
+
+    img.control:hover {
+      cursor: pointer;
+    }
+
+    a.author {
+      color: gray;
+    }
+
+    a.menu {
+      padding: 10px;
+      display: block;
+      background-color: #eee;
+      border-radius: 10px;
+      margin: 10px;
+      min-width: 17em;
+    }
+
+    .left {
+      text-align: left;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    table.center,
+    div.center {
+      margin: 0 auto;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    .justify {
+      text-align: justify;
+    }
+
+    .wide {
+      width: 100%;
+    }
+
+    .right {
+      float: right;
+    }
+
+    table.cellpadding3 td {
+      padding: 3px;
+    }
+
+    table.cellpadding10 td {
+      padding: 10px;
+    }
+
+    .gray {
+      color: gray;
+    }
+
+    img {
+      border: 0;
+    }
+
+    table.border,
+    table.border td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    .nowrap {
+      white-space: nowrap;
+    }
+
+    .hidden {
+      visibility: hidden;
+    }
+
+    .middle {
+      vertical-align: middle;
+    }
+
+    table.main {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    input.full_width {
+      width: 80%;
+    }
+
+    input.full_width_60 {
+      width: 60%;
+    }
+
+    input.full_width_20 {
+      width: 20em;
+    }
+
+    div.full_width {
+      width: 80%;
+    }
+
+    .icon:hover {
+      cursor: pointer;
+    }
+
+    .shadow {
+      box-shadow: 4px 4px 12px 2px #808080;
+      margin: 5px auto 12px auto;
+      padding: 4px;
+    }
+
+    input[type='number'] {
+      -moz-appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+
+    #perm_ad {
+      min-height: 280px;
+    }
+
+    .table {
+      display: table;
+    }
+
+    .section {
+      padding: 5px 0;
+    }
+
+    .warn {
+      border-radius: 25px;
+      border: 10px solid black;
+      padding: 20px;
+      background-color: white;
+    }
+
+    @-webkit-keyframes blinker {
+      from {
+        opacity: 1.0;
+      }
+
+      to {
+        opacity: 0.0;
+      }
+    }
+
+    .blink {
+      animation-name: blinker;
+      animation-duration: 0.75s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      animation-direction: alternate;
+      animation-name: blinker;
+      -moz-animation-duration: 0.75s;
+      -moz-animation-iteration-count: infinite;
+      -moz-animation-timing-function: ease-in-out;
+      -moz-animation-direction: alternate;
+      -webkit-animation-name: blinker;
+      -webkit-animation-duration: 0.75s;
+      -webkit-animation-iteration-count: infinite;
+      -webkit-animation-timing-function: ease-in-out;
+      -webkit-animation-direction: alternate;
+    }
+
+    .tooltip {
+      background-color: #FFA9B5;
+      padding: 10px;
+      position: absolute;
+      border-radius: 10px;
+      font-size: small;
+      border: solid 1px red;
+    }
+
+    .tooltip::after {
+      content: " ";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: red transparent transparent transparent;
+    }
+
+    .copy-tooltip {
+      position: absolute;
+      background-color: rgba(255, 255, 255, 255);
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-size: 12px;
+      color: #555;
+      opacity: 0;
+      transition: transform 0.5s ease-in-out, opacity 1s ease-in-out;
+      box-shadow: 3px 3px 3px 0 #ddd;
+      border: solid 1px green;
+      z-index: 1;
+    }
+
+    .copy-tooltip-arrow-left::after {
+      content: " ";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent green transparent transparent;
+    }
+
+    .copy-tooltip-arrow-right::after {
+      content: " ";
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent transparent green;
+    }
+
+    img.logo {
+      transition: opacity 3s;
+      opacity: 1;
+    }
+
+    img.logo:hover {
+      opacity: 0;
+    }
+
+    table.results {
+      border-collapse: collapse;
+      text-align: left;
+      margin: 10px auto;
+    }
+
+    div.results {
+      padding: 10px 0;
+    }
+
+    table.results th {
+      background-color: #DBEEE7;
+      padding: 10px;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    table.results td {
+      background-color: #E9FEF9;
+      border-top: 1px solid gray;
+      padding: 10px;
+    }
+
+    table.results tr:hover td {
+      background-color: #F4FEFC;
+    }
+
+    table.resutls tr {
+      border: 1px solid white;
+    }
+
+    table.results tr:first-child th:first-child {
+      border-top-left-radius: 20px;
+    }
+
+    table.results tr:first-child th:last-child {
+      border-top-right-radius: 20px;
+    }
+
+    table.results tr:last-child td:first-child {
+      border-bottom-left-radius: 20px;
+    }
+
+    table.results tr:last-child td:last-child {
+      border-bottom-right-radius: 20px;
+    }
+
+    table.results tr:last-child th:first-child {
+      border-bottom-left-radius: 20px;
+    }
+
+    table.results tr:last-child th:last-child {
+      border-bottom-right-radius: 20px;
+    }
+
+    .ac-renderer {
+      position: absolute;
+      background: #eee;
+      border: 1px solid #ddd;
+      -moz-box-shadow: 2px 2px 2px rgba(102, 102, 102, .4);
+      -webkit-box-shadow: 2px 2px 2px rgba(102, 102, 102, .4);
+      width: 300px;
+    }
+
+    .ac-row {
+      cursor: pointer;
+      font-size: 0.8em;
+      color: #333;
+      padding: .4em;
+    }
+
+    .ac-highlighted {
+      font-weight: bold;
+    }
+
+    .ac-active {
+      color: #eb8f00;
+      border: 1px solid #fbd850;
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="translations"></div>
+  <table class="center zero main" id="main">
+    <tbody>
+      <tr class="center">
+        <td>
+          <h1>JD CK 更新</h1>
+        </td>
+      </tr>
+      <tr class="center">
+        <td>
+          <div class="main_div">
+            <div class="title_div">
+              <div class="input_div">
+                <div class="form_div">
+                    <table class="input_form wide">
+                      <tbody>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                            <td><label>CK：</label><input type="text" id="Cookie" value="" style="background: transparent;" /></td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <input type="button" onclick="update();" value="更新" />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                        <tr>
+                          <td class="center"> </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+              <div class="title_div">
+                <b>结果</b>
+              </div>
+              <div id="output_div" style="display: block;">
+                <br>
+                <div id="solution_div" style="text-align: center;">
+                </div>
+                <br>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="center"> </td>
+      </tr>
+      <tr>
+        <td class="center"> </td>
+      </tr>
+      <tr>
+        <td class="center"> </td>
+      </tr>
+      <tr class="center">
+        <td class="text"> <span class="m gray">  <br />&copy; 2021</span><br /> </td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <script>
+    function update() {
+      var Cookie = document.getElementById('Cookie').value;
+      if (Cookie == '') {
+          document.getElementById('solution_div').innerHTML = '<p class="center">数据输入不完整，请填写完整</p>';
+      } else {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/update_jd_ck', true);
+        xhr.setRequestHeader("Content-type", 'application/json');
+        var sendData = {value: Cookie};
+        xhr.send(JSON.stringify(sendData));
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4) {
+            var result = JSON.parse(xhr.responseText);
+            document.getElementById('solution_div').innerHTML = result.value;
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>

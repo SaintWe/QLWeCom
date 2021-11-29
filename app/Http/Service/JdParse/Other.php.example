@@ -1,0 +1,65 @@
+<?php
+
+namespace App\Http\Service\JdParse;
+
+use App\Http\Service\JdParseInterface;
+use App\Models\JdCk;
+use App\Models\PushUser;
+
+class Other extends JdParseInterface
+{
+    /**
+     * null 或 0 使用主要进行推送，其他的数字使用其他推送
+     *
+     * @var string
+     */
+    public $push_id = '1';
+
+    public $title   = '/(此处处理未匹配到的其他消息)/i';
+
+    /**
+     * @param string $node 节点 ID
+     * @param string $text 推送标题
+     * @param string $desp 推送内容
+     */
+    public function handle(string $node, string $text, string $desp): array
+    {
+        $user_id   = PushUser::where('detail', 1)->pluck('id')->toArray();
+        $usernames = JdCk::whereIn('user_id', $user_id)->whereNotNull('nickname')->pluck('nickname', 'username')->toArray();
+        $usernames = implode('|', array_merge(array_keys($usernames), array_values($usernames)));
+        if (strpos($text, '东东萌宠') !== false) {
+            $split_data = explode(PHP_EOL . PHP_EOL, $desp);
+        } else {
+            $split_data = preg_split('/\n+(?=.*?(京东账号|京东号|账号\s?\d+|账号名称：)\s?\d*.*)/m', $desp, -1, PREG_SPLIT_NO_EMPTY);
+        }
+        if (!empty($usernames)) {
+            $data = preg_grep('/(?<=京东账号|京东号|账号|账号名称：)\s?\d*.*(' . $usernames . ')/i', $split_data);
+            if (!empty($data)) {
+                foreach ($data as $value) {
+                    if (preg_match('/(?<=京东账号|京东号|账号|账号名称：)\s?\d*.*(' . $usernames . ')/i', $value, $matches) === 1) {
+                        $JdCk = JdCk::where(
+                            static function ($query) use ($matches) {
+                                $query->where('nickname', $matches[1])
+                                    ->orWhere('username', $matches[1]);
+                            }
+                        )->whereNotNull('nickname')->first();
+                        if ($JdCk !== null) {
+                            $user = $JdCk->get_user();
+                            if ($user !== null) {
+                                $this->WeComPush->push_text($text . PHP_EOL . PHP_EOL . $value, $user->wecom_id, '', '', 0, 0, 1, 14400);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (preg_match('/(?<=京东账号|京东号|账号|账号名称：)\s?\d*.*/i', $desp, $matches) === 0) {
+            $this->WeComPush->push_text($text . PHP_EOL . PHP_EOL . $desp . PHP_EOL . PHP_EOL . '@all', env('ADMIN_WECOM_ID', ''));
+        }
+        return [
+            'retcode' => 0,
+            'status'  => true,
+            'message' => 'succeed.'
+        ];
+    }
+}

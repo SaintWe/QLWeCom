@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Http\Service\JdParse;
+
+use App\Http\Service\JdParseInterface;
+
+class Task extends JdParseInterface
+{
+    /**
+     * null 或 0 使用主要进行推送，其他的数字使用其他推送
+     *
+     * @var string
+     */
+    public $push_id = '1';
+
+    public $title   = '/(新增任务|删除任务)/i';
+
+    /**
+     * @param string $node 节点 ID
+     * @param string $text 推送标题
+     * @param string $desp 推送内容
+     */
+    public function handle(string $node, string $text, string $desp): array
+    {
+        $wecom_id = env('ADMIN_WECOM_ID', '');
+        if (!empty($wecom_id)) {
+            $this->WeComPush->push_text($text . PHP_EOL . PHP_EOL . $desp . PHP_EOL . PHP_EOL . '@admin', $wecom_id, '', '', 0, 0, 1, 14400);
+        }
+        return [
+            'retcode' => 0,
+            'status'  => true,
+            'message' => 'succeed.',
+        ];
+    }
+}
