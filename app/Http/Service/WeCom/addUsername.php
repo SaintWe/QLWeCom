@@ -5,6 +5,7 @@ namespace App\Http\Service\WeCom;
 use App\Http\Service\WeComInterface;
 use App\Models\JdCk;
 use App\Models\PushUser;
+use Illuminate\Support\Str;
 
 class addUsername extends WeComInterface
 {
@@ -51,6 +52,7 @@ class addUsername extends WeComInterface
             return '提交的用户名已存在';
         }
         $JdCk           = new JdCk();
+        $JdCk->uuid     = Str::uuid();
         $JdCk->user_id  = $user->id;
         $JdCk->username = urldecode($UserName);
         $JdCk->nickname = null;
