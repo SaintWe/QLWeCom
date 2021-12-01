@@ -7,6 +7,7 @@ use App\Http\Service\QingLong\QingLongApi;
 use App\Http\Service\WeComInterface;
 use App\Models\JdCk;
 use App\Models\PushUser;
+use Illuminate\Support\Str;
 
 class Cookie extends WeComInterface
 {
@@ -68,6 +69,7 @@ class Cookie extends WeComInterface
             $JdCk = JdCk::where('user_id', $user->id)->where('username', $pt_pin[1])->first();
             if ($JdCk === null) {
                 $JdCk           = new JdCk();
+                $JdCk->uuid     = Str::uuid();
                 $JdCk->user_id  = $user->id;
                 $JdCk->username = urldecode($pt_pin[1]);
             }
