@@ -16,7 +16,8 @@ CREATE TABLE `jd_ck` (
   `nickname` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `updated_at` int(10) unsigned NOT NULL,
   `created_at` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uuid` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
